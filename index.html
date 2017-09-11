@@ -12,13 +12,53 @@
 
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css" />
 
+<link href="https://fonts.googleapis.com/css?family=VT323" rel="stylesheet">
+
 <meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
 <style>
+body{
+    background-color: rgb(0, 51, 102);
+}
+#timer{
+    text-align: center;
+    font-family: VT323;
+    font-size: 55.7777777px;
+}
 </style>
 <body>
-<h1>hi</h1>
+<div class="container">
+<div id="ClockDiv">
+<h2 id=timer></h2>
+</div>
+</div>
 <script>
+    var setMin = 1;
+    document.getElementById('timer').innerHTML =
+  setMin + ":" + 00;
+startTimer();
+
+function startTimer() {
+  var presentTime = document.getElementById('timer').innerHTML;
+  var timeArray = presentTime.split(/[:]+/);
+  var m = timeArray[0];
+  var s = checkSecond((timeArray[1] - 1));
+  if(s==59){m=m-1}
+  if(m<0){
+    m = 1;
+    s = 0 + "0";
+    }
+  
+  document.getElementById('timer').innerHTML =
+    m + ":" + s;
+  setTimeout(startTimer, 1000);
+}
+
+function checkSecond(sec) {
+  if (sec < 10 && sec >= 0) {sec = "0" + sec}; // add zero in front of numbers < 10
+  if (sec < 0) {sec = "59"};
+  return sec;
+}
 </script>
 </body>
 </html>
