@@ -114,11 +114,13 @@ breakTime + ":" + 0 + "0";
 }
 });
 $("#breakTimeDown").on("click", function(){
+if(breakTime > 0){
 breakTime--;
 $("#breakTimeText").html(breakTime);
 if(isWork == false){
 document.getElementById('timer').innerHTML =
 breakTime + ":" + 0 + "0";
+}
 }
 });
 $("#workTimePlus").on("click", function(){
@@ -130,19 +132,19 @@ workTime + ":" + 0 + "0";
 }
 });
 $("#workTimeDown").on("click", function(){
+if(workTime > 0){
 workTime--;
 $("#workTimeText").html(workTime);
 if(isWork == true){
 document.getElementById('timer').innerHTML =
 workTime + ":" + 0 + "0";
 }
-document.getElementById('timer').innerHTML =
-workTime + ":" + 0 + "0";
+}
 });
 $("#timer").html(workTime + ":" + 0 + "0");
 //$("#timer").html(workTime + ":" + 0 + "0");
 $("#start").on("click", function(){
-if(started == false){
+if(started == false && workTime != 0){
 startTimer();
 started = true;
 }
