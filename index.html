@@ -102,31 +102,45 @@ text-align: center;
 var breakTime = 0;
 var workTime = 0;
 var started = false;
-var isWork = false;
+var isWork = true;
 $("#breakTimeText").html(breakTime);
 $("#workTimeText").html(workTime);
 $("#breakTimePlus").on("click", function(){
 breakTime++;
 $("#breakTimeText").html(breakTime);
+if(isWork == false){
+document.getElementById('timer').innerHTML =
+breakTime + ":" + 0 + "0";
+}
 });
 $("#breakTimeDown").on("click", function(){
 breakTime--;
 $("#breakTimeText").html(breakTime);
+if(isWork == false){
+document.getElementById('timer').innerHTML =
+breakTime + ":" + 0 + "0";
+}
 });
 $("#workTimePlus").on("click", function(){
 workTime++;
 $("#workTimeText").html(workTime);
+if(isWork == true){
 document.getElementById('timer').innerHTML =
 workTime + ":" + 0 + "0";
+}
 });
 $("#workTimeDown").on("click", function(){
 workTime--;
 $("#workTimeText").html(workTime);
+if(isWork == true){
+document.getElementById('timer').innerHTML =
+workTime + ":" + 0 + "0";
+}
 document.getElementById('timer').innerHTML =
 workTime + ":" + 0 + "0";
 });
 $("#timer").html(workTime + ":" + 0 + "0");
-
+//$("#timer").html(workTime + ":" + 0 + "0");
 $("#start").on("click", function(){
 if(started == false){
 startTimer();
@@ -143,14 +157,16 @@ function startTimer() {
     m = m-1
   }
   if(m<0){
-    if(isWork == false){
+    if(isWork == true){
+      console.log(isWork);
       $("#status").html("Break");
-      isWork = true;
+      isWork = false;
       m = breakTime;
       s = 0 + "0";
-    }else if(isWork == true){
+    }else if(isWork == false){
+      console.log(isWork);
     $("#status").html("Work");
-    isWork = false;
+    isWork = true;
     m = workTime;
     s = 0 + "0";
     }
