@@ -32,15 +32,39 @@ body{
     font-size: 55px;
     color: white;
 }
-#timeText{
+#breakTimeText{
   color: white;
+  font-family: VT323, sans-serif;
+  text-align: center;
+}
+#workTimeText{
+  color: white;
+  font-family: VT323, sans-serif;
   text-align: center;
 }
 #leftButtons{
-float: left;
+  color: white;
+  font-family: VT323, sans-serif;
+  float: left;
+  text-align: center;
 }
 #rightButtons{
-float: right;
+  color: white;
+  font-family: VT323, sans-serif;
+  float: right;
+  text-align: center;
+}
+#start{
+  color: white;
+  font-family: VT323, sans-serif;
+}
+#startButtonDiv{
+text-align: center;
+}
+#status{
+  color: white;
+  font-family: VT323, sans-serif;
+  text-align: center;
 }
 </style>
 <body>
@@ -51,26 +75,64 @@ float: right;
 <div class="row">
 <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
 <div id="leftButtons">
+<h2>Break</h2>
 <button id="breakTimePlus" class="btn btn-primary" ><span class="glyphicon glyphicon-arrow-up"></button>
-<h2 id="timeText" >1</h2>
+<h2 id="breakTimeText" ></h2>
 <button id="breakTimeDown" class="btn btn-primary" ><span class="glyphicon glyphicon-arrow-down"></button>
 </div>
 <div id="rightButtons">
+<h2>Work</h2>
 <button id="workTimePlus" class="btn btn-primary" ><span class="glyphicon glyphicon-arrow-up"></button>
-<h2 id="timeText" >1</h2>
+<h2 id="workTimeText" ></h2>
 <button id="workTimeDown" class="btn btn-primary" ><span class="glyphicon glyphicon-arrow-down"></button>
 </div>
 </div>
 </div>
 <div id="clockDiv">
+<h2 id=status>Work</h2>
+</div>
+<div id="clockDiv">
 <h2 id=timer></h2>
+</div>
+<div id="startButtonDiv">
+<button id="start" class="btn btn-primary">Start!</button>
 </div>
 </div>
 <script>
-    var setMin = 1;
-    document.getElementById('timer').innerHTML =
-  setMin + ":" + 00;
+var breakTime = 0;
+var workTime = 0;
+var started = false;
+var isWork = false;
+$("#breakTimeText").html(breakTime);
+$("#workTimeText").html(workTime);
+$("#breakTimePlus").on("click", function(){
+breakTime++;
+$("#breakTimeText").html(breakTime);
+});
+$("#breakTimeDown").on("click", function(){
+breakTime--;
+$("#breakTimeText").html(breakTime);
+});
+$("#workTimePlus").on("click", function(){
+workTime++;
+$("#workTimeText").html(workTime);
+document.getElementById('timer').innerHTML =
+workTime + ":" + 0 + "0";
+});
+$("#workTimeDown").on("click", function(){
+workTime--;
+$("#workTimeText").html(workTime);
+document.getElementById('timer').innerHTML =
+workTime + ":" + 0 + "0";
+});
+$("#timer").html(workTime + ":" + 0 + "0");
+
+$("#start").on("click", function(){
+if(started == false){
 startTimer();
+started = true;
+}
+});
 
 function startTimer() {
   var presentTime = document.getElementById('timer').innerHTML;
@@ -78,12 +140,21 @@ function startTimer() {
   var m = timeArray[0];
   var s = checkSecond((timeArray[1] - 1));
   if(s==59){
-    m=m-1
-    }
+    m = m-1
+  }
   if(m<0){
-    m = 1;
+    if(isWork == false){
+      $("#status").html("Break");
+      isWork = true;
+      m = breakTime;
+      s = 0 + "0";
+    }else if(isWork == true){
+    $("#status").html("Work");
+    isWork = false;
+    m = workTime;
     s = 0 + "0";
     }
+  }
   
   document.getElementById('timer').innerHTML =
     m + ":" + s;
