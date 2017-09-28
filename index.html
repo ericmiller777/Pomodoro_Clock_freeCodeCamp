@@ -115,14 +115,14 @@
     var workTime = 0;
     var started = false;
     var isWork = true;
-    var audio = new Audio('Rise05.mp3');
+    var audio = new Audio("Rise05.mp3");
     $("#breakTimeText").html(breakTime);
     $("#workTimeText").html(workTime);
     $("#breakTimePlus").on("click", function () {
       breakTime++;
       $("#breakTimeText").html(breakTime);
       if (isWork == false) {
-        document.getElementById('timer').innerHTML =
+        document.getElementById("timer").innerHTML =
           breakTime + ":" + 0 + "0";
       }
     });
@@ -131,7 +131,7 @@
         breakTime--;
         $("#breakTimeText").html(breakTime);
         if (isWork == false) {
-          document.getElementById('timer').innerHTML =
+          document.getElementById("timer").innerHTML =
             breakTime + ":" + 0 + "0";
         }
       }
@@ -140,7 +140,7 @@
       workTime++;
       $("#workTimeText").html(workTime);
       if (isWork == true) {
-        document.getElementById('timer').innerHTML =
+        document.getElementById("timer").innerHTML =
           workTime + ":" + 0 + "0";
       }
     });
@@ -149,7 +149,7 @@
         workTime--;
         $("#workTimeText").html(workTime);
         if (isWork == true) {
-          document.getElementById('timer').innerHTML =
+          document.getElementById("timer").innerHTML =
             workTime + ":" + 0 + "0";
         }
       }
@@ -190,7 +190,7 @@
         }
       }
 
-      document.getElementById('timer').innerHTML =
+      document.getElementById("timer").innerHTML =
         m + ":" + s;
       setTimeout(startTimer, 1000);
     }
